@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { App } from './App';
+import { App } from './App/App';
 import { AppState } from './AppState/AppState';
 import { Provider } from './Context';
 import { initIndexConfig } from './indexConfig';
