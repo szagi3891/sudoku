@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "jsx": "react",
+        "lib": ["dom", "es6", "esnext"],
+        "downlevelIteration": true,
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "noEmit": true,
+
+        "strict": true,
+
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+    }
+}   
