@@ -22,7 +22,32 @@ const Item = styled('div')<ItemPropsType>`
     display: flex;
     align-items: center;
     justify-content: center;
-    ${props => props.shouldShow ? `background-color: #00ff0030;`: ''}
+    ${props => {
+        if (props.shouldShow) {
+            return `
+                background-color: #00ff0030;
+                cursor: pointer;
+            `;
+        }
+
+        return '';
+    }}
+`;
+
+const WrapperOne = styled('div')`
+    width: ${props => props.theme.config.itemWidth}px;
+    height: ${props => props.theme.config.itemWidth}px;
+`;
+
+const ItemOnlyOne = styled('div')`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: ${props => props.theme.config.itemWidth}px;
+    height: ${props => props.theme.config.itemWidth}px;
+    background-color: #00ff00;
+    font-size: 40px;
+    color: blue;
     cursor: pointer;
 `;
 
@@ -35,14 +60,39 @@ export const ItemPossible = observer((props: ItemPossiblePropsType) => {
     const { possible, cell } = props;
 
     const values = possible.values;
+    const onlyOnePossible = values.length === 8;
+
+    if (onlyOnePossible) {
+        const out: Array<React.ReactNode> = [];
+        iterateBySudokuValue((number) => {
+            const shouldShow = !values.includes(number);
+    
+            if (shouldShow) {
+                const onClick = () => {
+                    cell.number.value = number;
+                };
+        
+                out.push(
+                    <ItemOnlyOne key={`id_${number}`} onClick={onClick}>{number}</ItemOnlyOne>
+                );
+            }
+        });
+    
+        return (
+            <WrapperOne>
+                {out}
+            </WrapperOne>
+        );
+    }
 
     const out: Array<React.ReactNode> = [];
-
     iterateBySudokuValue((number) => {
         const shouldShow = !values.includes(number);
 
         const onClick = () => {
-            cell.number.value = number;
+            if (shouldShow) {
+                cell.number.value = number;
+            }
         };
 
         out.push(
