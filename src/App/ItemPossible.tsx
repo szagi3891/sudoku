@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { observer } from "mobx-react";
+import { CellType } from "src/AppState/AppState";
 import { iterateBySudokuValue } from "src/AppState/NumberItem";
 import { PossibleValues } from "src/AppState/PossibleValues";
 
@@ -22,14 +23,16 @@ const Item = styled('div')<ItemPropsType>`
     align-items: center;
     justify-content: center;
     ${props => props.shouldShow ? `background-color: #00ff0030;`: ''}
+    cursor: pointer;
 `;
 
 interface ItemPossiblePropsType {
     possible: PossibleValues,
+    cell: CellType,
 }
 
 export const ItemPossible = observer((props: ItemPossiblePropsType) => {
-    const { possible } = props;
+    const { possible, cell } = props;
 
     const values = possible.values;
 
@@ -38,8 +41,12 @@ export const ItemPossible = observer((props: ItemPossiblePropsType) => {
     iterateBySudokuValue((number) => {
         const shouldShow = !values.includes(number);
 
+        const onClick = () => {
+            cell.number.value = number;
+        };
+
         out.push(
-            <Item key={`id_${number}`} shouldShow={shouldShow}>{shouldShow ? number : ''}</Item>
+            <Item key={`id_${number}`} shouldShow={shouldShow} onClick={onClick}>{shouldShow ? number : ''}</Item>
         );
     });
 
