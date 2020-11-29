@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 export class Config {
     border: number = 1;
-    itemWidth: number = 50;
+    itemWidth: number = 80;
 
     constructor() {
 

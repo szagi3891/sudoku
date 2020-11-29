@@ -1,6 +1,12 @@
 import { observer } from 'mobx-react';
 import styled from '@emotion/styled';
 import { Group } from './Group';
+import { useAppStateContext } from 'src/Context';
+
+const Center = styled('div')`
+    display: flex;
+    justify-content: center;
+`;
 
 const Wrapper = styled('div')`
     display: grid;
@@ -14,23 +20,21 @@ const Wrapper = styled('div')`
 `;
 
 export const App = observer(() => {
-    return (
-        <>
-            <Wrapper>
-                <Group />
-                <Group />
-                <Group />
-                <Group />
-                <Group />
-                <Group />
-                <Group />
-                <Group />
-                <Group />
-            </Wrapper>
+    const appState = useAppStateContext();
 
-            <br/><br/>
-            
-            <Group />
-        </>
+    const out: Array<React.ReactNode> = [];
+
+    appState.grid.forEach((x, y, square) => {
+        out.push(
+            <Group key={`${x}_${y}`} square={square}/>
+        );
+    });
+
+    return (
+        <Center>
+            <Wrapper>
+                { out }
+            </Wrapper>
+        </Center>
     );
 });
