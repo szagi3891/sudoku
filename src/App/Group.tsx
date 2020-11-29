@@ -3,8 +3,14 @@ import styled from '@emotion/styled';
 import { Item } from './Item';
 
 const Wrapper = styled('div')`
-    border: 1px solid black;
-    height: 90px;
+    border: ${props => props.theme.config.groupBorderSize}px solid black;
+
+    width: ${props => props.theme.config.groupWidthSize}px;
+    height: ${props => props.theme.config.groupWidthSize}px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    flex-shrink: 0;
 `;
 
 export const Group = observer(() => {

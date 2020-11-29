@@ -3,24 +3,34 @@ import styled from '@emotion/styled';
 import { Group } from './Group';
 
 const Wrapper = styled('div')`
-    border: 1px solid black;
-    width: 270px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    flex-shrink: 0;
+
+    width: ${props => props.theme.config.allWidth}px;
+    height: ${props => props.theme.config.allWidth}px;
+
+    border: 2px solid blue;
 `;
 
 export const App = observer(() => {
     return (
-        <Wrapper>
+        <>
+            <Wrapper>
+                <Group />
+                <Group />
+                <Group />
+                <Group />
+                <Group />
+                <Group />
+                <Group />
+                <Group />
+                <Group />
+            </Wrapper>
+
+            <br/><br/>
+            
             <Group />
-            <Group />
-            <Group />
-            <Group />
-            <Group />
-            <Group />
-            <Group />
-            <Group />
-            <Group />
-        </Wrapper>
+        </>
     );
 });
