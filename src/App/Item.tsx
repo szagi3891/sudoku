@@ -16,7 +16,8 @@ interface PropsType {
 }
 
 export const Item = observer((props: PropsType) => {
-    const value = props.cell.number.value;
+    const cell = props.cell;
+    const value = cell.number.value;
 
     if (value === null) {
         return (
@@ -28,7 +29,7 @@ export const Item = observer((props: PropsType) => {
 
     return (
         <Wrapper>
-            <ItemNumber number={value} />
+            <ItemNumber number={value} cell={cell} />
         </Wrapper>
     );
 });

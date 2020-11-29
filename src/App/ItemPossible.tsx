@@ -28,8 +28,6 @@ interface ItemPossiblePropsType {
     possible: PossibleValues,
 }
 
-//itemPossibleWidth
-
 export const ItemPossible = observer((props: ItemPossiblePropsType) => {
     const { possible } = props;
 
@@ -44,12 +42,6 @@ export const ItemPossible = observer((props: ItemPossiblePropsType) => {
             <Item key={`id_${number}`} shouldShow={shouldShow}>{shouldShow ? number : ''}</Item>
         );
     });
-
-    // for (const number of values) {
-    //     out.push(
-    //         <Item key={`id_${number}`}>{number}</Item>
-    //     );
-    // }
 
     return (
         <Wrapper>
