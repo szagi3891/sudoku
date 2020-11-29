@@ -1,13 +1,14 @@
-import { makeAutoObservable } from "mobx";
+// import { makeAutoObservable } from "mobx";
 
 export class Config {
     border: number = 1;
     itemWidth: number = 80;
 
-    constructor() {
+    itemPossibleWidth: number = 20;
 
-        makeAutoObservable(this);
-    }
+    // constructor() {
+    //     //makeAutoObservable(this);
+    // }
 
     get itemBorderSize(): number {
         return this.border;

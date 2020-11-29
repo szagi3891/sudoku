@@ -1,13 +1,15 @@
 import styled from "@emotion/styled";
 import { observer } from "mobx-react";
 import { CellType } from "src/AppState/AppState";
-import { SudokuValue } from "src/AppState/NumberItem";
+import { ItemNumber } from './ItemNumber';
+import { ItemPossible } from "./ItemPossible";
 
 const Wrapper = styled('div')`
     border: ${props => props.theme.config.itemBorderSize}px solid green;
     width: ${props => props.theme.config.itemWidthSize}px;
     height: ${props => props.theme.config.itemWidthSize}px;
 `;
+
 
 interface PropsType {
     cell: CellType,
@@ -18,7 +20,9 @@ export const Item = observer((props: PropsType) => {
 
     if (value === null) {
         return (
-            <Wrapper/>
+            <Wrapper>
+                <ItemPossible possible={props.cell.possible} />
+            </Wrapper>
         );
     }
 
@@ -28,23 +32,3 @@ export const Item = observer((props: PropsType) => {
         </Wrapper>
     );
 });
-
-const ItemNumberWrapper = styled('div')`
-    text-align: center;
-    font-size: 40px;
-    color: blue;
-    height: ${props => props.theme.config.itemWidthSize}px;
-    line-height: ${props => props.theme.config.itemWidthSize}px;
-`;
-
-interface ItemNumberPropsType {
-    number: SudokuValue
-}
-
-const ItemNumber = observer((props: ItemNumberPropsType) => {
-    return (
-        <ItemNumberWrapper>
-            { props.number }
-        </ItemNumberWrapper>
-    )
-})
