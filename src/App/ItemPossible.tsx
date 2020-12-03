@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { observer } from "mobx-react";
 import { CellType } from "src/AppState/AppState";
-import { iterateByAllSudokuValue, iterateBySudokuValue } from "src/AppState/NumberItem";
+import { getIteratorByAllSudokuValue } from "src/AppState/NumberItem";
 
 const Wrapper = styled('div')`
     width: ${props => props.theme.config.itemWidth}px;
@@ -77,7 +77,7 @@ export const ItemPossible = observer((props: ItemPossiblePropsType) => {
 
     if (onlyOnePossible) {
         const out: Array<React.ReactNode> = [];
-        iterateBySudokuValue(values, (number) => {
+        for (const number of values) {
             const onClick = () => {
                 cell.number.value = number;
             };
@@ -85,7 +85,7 @@ export const ItemPossible = observer((props: ItemPossiblePropsType) => {
             out.push(
                 <ItemOnlyOne key={`id_${number}`} onClick={onClick}>{number}</ItemOnlyOne>
             );
-        });
+        }
     
         return (
             <WrapperOne>
@@ -95,7 +95,7 @@ export const ItemPossible = observer((props: ItemPossiblePropsType) => {
     }
 
     const out: Array<React.ReactNode> = [];
-    iterateByAllSudokuValue((number) => {
+    for (const number of getIteratorByAllSudokuValue()) {
         const shouldShow = values.includes(number);
 
         const onClick = () => {
@@ -107,7 +107,7 @@ export const ItemPossible = observer((props: ItemPossiblePropsType) => {
         out.push(
             <Item key={`id_${number}`} shouldShow={shouldShow} onClick={onClick}>{shouldShow ? number : ''}</Item>
         );
-    });
+    }
 
     return (
         <Wrapper>
