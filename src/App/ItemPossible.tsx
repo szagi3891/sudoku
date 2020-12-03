@@ -57,20 +57,6 @@ interface ItemPossiblePropsType {
 export const ItemPossible = observer((props: ItemPossiblePropsType) => {
     const { cell } = props;
 
-    const possibleLastValue = cell.possibleLast.value;
-
-    if (possibleLastValue !== null) {
-        const onClick = () => {
-            cell.number.value = possibleLastValue;
-        };
-        return (
-            <WrapperOne>
-                <ItemOnlyOne onClick={onClick}>({possibleLastValue})</ItemOnlyOne>
-            </WrapperOne>
-        );
-    }
-
-
     const possible = cell.possible;
     const values = possible.values;
     const onlyOnePossible = values.length === 1;
@@ -93,6 +79,20 @@ export const ItemPossible = observer((props: ItemPossiblePropsType) => {
             </WrapperOne>
         );
     }
+
+    const possibleLastValue = cell.possibleLast.value;
+
+    if (possibleLastValue !== null) {
+        const onClick = () => {
+            cell.number.value = possibleLastValue;
+        };
+        return (
+            <WrapperOne>
+                <ItemOnlyOne onClick={onClick}>({possibleLastValue})</ItemOnlyOne>
+            </WrapperOne>
+        );
+    }
+
 
     const out: Array<React.ReactNode> = [];
     for (const number of getIteratorByAllSudokuValue()) {
