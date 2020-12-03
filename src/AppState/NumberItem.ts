@@ -17,8 +17,13 @@ export const iterateByAllSudokuValue = (callback: (index: SudokuValue) => void) 
 };
 
 
-// iterateBySudokuValue((number) => {
-//     const shouldShow = values.includes(number);
+export const iterateBySudokuValue = (list: Array<SudokuValue>, callback: (number: SudokuValue) => void) => {
+    iterateByAllSudokuValue((index: SudokuValue) => {
+        if (list.includes(index)) {
+            callback(index);
+        }
+    });
+}
 
 export class NumberItem {
     value: SudokuValue | null = null;
