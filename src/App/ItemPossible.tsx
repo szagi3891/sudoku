@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { observer } from "mobx-react";
 import { CellType } from "src/AppState/AppState";
-import { iterateBySudokuValue } from "src/AppState/NumberItem";
+import { iterateByAllSudokuValue } from "src/AppState/NumberItem";
 import { PossibleValues } from "src/AppState/PossibleValues";
 
 const Wrapper = styled('div')`
@@ -60,12 +60,12 @@ export const ItemPossible = observer((props: ItemPossiblePropsType) => {
     const { possible, cell } = props;
 
     const values = possible.values;
-    const onlyOnePossible = values.length === 8;
+    const onlyOnePossible = values.length === 1;
 
     if (onlyOnePossible) {
         const out: Array<React.ReactNode> = [];
-        iterateBySudokuValue((number) => {
-            const shouldShow = !values.includes(number);
+        iterateByAllSudokuValue((number) => {
+            const shouldShow = values.includes(number);
     
             if (shouldShow) {
                 const onClick = () => {
@@ -86,8 +86,8 @@ export const ItemPossible = observer((props: ItemPossiblePropsType) => {
     }
 
     const out: Array<React.ReactNode> = [];
-    iterateBySudokuValue((number) => {
-        const shouldShow = !values.includes(number);
+    iterateByAllSudokuValue((number) => {
+        const shouldShow = values.includes(number);
 
         const onClick = () => {
             if (shouldShow) {

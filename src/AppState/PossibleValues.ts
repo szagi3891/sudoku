@@ -16,14 +16,14 @@ export class PossibleValues {
 
     get values(): Array<SudokuValue> {
 
-        const currentNumbersInCeis: Set<SudokuValue> = new Set();
+        const currentNumbersInCeis: Set<SudokuValue> = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
         //iterowaine po wierszu
         iterateByTreeIndex((x0) => {
             iterateByTreeIndex((x1) => {
                 const value = this.grid.getFrom(x0, this.level0y).getFrom(x1, this.level1y).value;
                 if (value !== null) {
-                    currentNumbersInCeis.add(value);
+                    currentNumbersInCeis.delete(value);
                 }
             });
         });
@@ -33,7 +33,7 @@ export class PossibleValues {
             iterateByTreeIndex((y1) => {
                 const value = this.grid.getFrom(this.level0x, y0).getFrom(this.level1x, y1).value;
                 if (value !== null) {
-                    currentNumbersInCeis.add(value);
+                    currentNumbersInCeis.delete(value);
                 }
             });
         });
@@ -44,7 +44,7 @@ export class PossibleValues {
             iterateByTreeIndex((y1) => {
                 const value = this.grid.getFrom(this.level0x, this.level0y).getFrom(x1, y1).value;
                 if (value !== null) {
-                    currentNumbersInCeis.add(value);
+                    currentNumbersInCeis.delete(value);
                 }
             });
         });
