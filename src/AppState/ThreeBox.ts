@@ -2,11 +2,13 @@ export type TreeBoxIndexType = 0 | 1 | 2;
 
 type ForEachCallbak<T> = (index: TreeBoxIndexType, value: T) => void;
 
-export const iterateByTreeIndex = (callback: (index: TreeBoxIndexType) => void) => {
-    callback(0);
-    callback(1);
-    callback(2);
-};
+export const getIterateAllTreeIndex = ():Array<TreeBoxIndexType> => [0, 1, 2];
+// export const iterateByTreeIndex = (callback: (index: TreeBoxIndexType) => void) => {
+//     callback(0);
+//     callback(1);
+//     callback(2);
+// };
+
 
 export class ThreeBox<T> {
     constructor(

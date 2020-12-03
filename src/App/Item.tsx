@@ -22,7 +22,7 @@ export const Item = observer((props: PropsType) => {
     if (value === null) {
         return (
             <Wrapper>
-                <ItemPossible cell={props.cell} possible={props.cell.possible} />
+                <ItemPossible cell={props.cell} />
             </Wrapper>
         );
     }

@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { observer } from "mobx-react";
 import { CellType } from "src/AppState/AppState";
 import { iterateByAllSudokuValue, iterateBySudokuValue } from "src/AppState/NumberItem";
-import { PossibleValues } from "src/AppState/PossibleValues";
 
 const Wrapper = styled('div')`
     width: ${props => props.theme.config.itemWidth}px;
@@ -52,13 +51,27 @@ const ItemOnlyOne = styled('div')`
 `;
 
 interface ItemPossiblePropsType {
-    possible: PossibleValues,
     cell: CellType,
 }
 
 export const ItemPossible = observer((props: ItemPossiblePropsType) => {
-    const { possible, cell } = props;
+    const { cell } = props;
 
+    const possibleLastValue = cell.possibleLast.value;
+
+    if (possibleLastValue !== null) {
+        const onClick = () => {
+            cell.number.value = possibleLastValue;
+        };
+        return (
+            <WrapperOne>
+                <ItemOnlyOne onClick={onClick}>({possibleLastValue})</ItemOnlyOne>
+            </WrapperOne>
+        );
+    }
+
+
+    const possible = cell.possible;
     const values = possible.values;
     const onlyOnePossible = values.length === 1;
 
